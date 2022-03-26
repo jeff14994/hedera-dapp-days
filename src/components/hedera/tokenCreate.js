@@ -12,13 +12,13 @@ async function tokenCreateFcn() {
 	console.log("Creating Token");
 	// Create transaction
 	const tokenCreateTx = new TokenCreateTransaction()
-	.setTokenName("dAppDayToken")
-	.setTokenSymbol("DDT")
-	.setTreasuryAccountId(operatiorId)
-	.setInitialSupply(100)
-	.setDecimals(0)
-	.setSupplyKey(operatorKey)
-	.freezeWith(client);
+		.setTokenName("dAppDayToken")
+		.setTokenSymbol("DDT")
+		.setTreasuryAccountId(operatiorId)
+		.setInitialSupply(100)
+		.setDecimals(0)
+		.setSupplyKey(operatorKey)
+		.freezeWith(client);
 	// Sign the transaction
 	const tokenCreateSign = await tokenCreateTx.sign(operatorKey);
 	const tokenCreateSubmit = await tokenCreateSign.execute(client);

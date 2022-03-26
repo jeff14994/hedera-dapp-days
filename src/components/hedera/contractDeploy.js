@@ -34,5 +34,20 @@ async function contractDeployFcn(tokenId) {
 	// STEP 3 ===================================
 	console.log(`STEP 3 ===================================`);
 	// Create the smart contract
-}
+	const contractInstantiateTx = new ContractCreateTransaction()
+		.setBytecodeFileId(bytecodeField)
+		.setGas(4000000)
+		.setConstructorParameters(new ContractFunctionParameters().addAddress(tokenId.toSolidityAddress()));
+	const contractInstantiateSubmit = await contractInstantiateTx.execute(client);
+	const contractInstantiateRx = await contractInstantiateSubmit.getReceipt(client);
+	// Contract id
+	const cId = contractInstantiateRx.contractId;
+	// Contract address
+	const constractAddress = cId.toSolidityAddress();
+	console.log(`The smart contract ID is: ${cId}`)
+	console.log(`The smart contract ID in Solidity format is: ${constractAddress}`)
+	
+	return cId
+
+}	
 export default contractDeployFcn;
