@@ -7,5 +7,16 @@ import "./hip-206/HederaResponseCodes.sol";
 
 contract AssoTransHTS is HederaTokenService {
 
+    address tokenAddress;
+    // Exectue the first time 
+    constructor(address _tokenAddress) public {
+        tokenAddress = _tokenAddress;
+        
+    }
+    // Anyone can call external function
+    function tokenAssoTrans(int64 _amount) external {
+        int response1 = HederaTokenService.associateToken(address(this), tokenAddress);
+        int response2 = HederaTokenService.transferToken(tokenAddress, msg.sender, address(this), _amount);
 
+    }
 }
